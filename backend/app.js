@@ -2,10 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const customEnv = require("custom-env");
+const dotenv = require("dotenv");
+dotenv.config();
+// const customEnv = require("custom-env");
 const app = express();
-customEnv.env(process.env.NODE_ENV, "./config");
-require("custom-env").env(process.env.NODE_ENV, "./config");
+// customEnv.env(process.env.NODE_ENV, "./config");
+// require("custom-env").env(process.env.NODE_ENV, "./config");
 
 app.use(cors());
 
