@@ -2,7 +2,6 @@
 
 const loginController = require("../controllers/loginController.js");
 const isLoggedInController = require("../controllers/isLoggedInController.js");
-const chatController = require("../controllers/chatController.js");
 const router = require("express").Router();
 
 // go to the controller to generate a token
