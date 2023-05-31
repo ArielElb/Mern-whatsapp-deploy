@@ -1,7 +1,5 @@
-//
 
 const chatService = require("../services/ChatService");
-// get chats
 
 const getChats = async (req, res) => {
   try {
