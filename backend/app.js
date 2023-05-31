@@ -12,7 +12,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://whatsapp-ap2-mern.onrender.com",
+    origin: "https://whatsapp-ap2-mern.onrender.com" 
+    
   })
 );
 
