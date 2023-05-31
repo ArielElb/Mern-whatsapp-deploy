@@ -1,6 +1,6 @@
 const User = require("../models/UserModel");
 const Chat = require("../models/ChatModel");
-const io = require("socket.io")(process.env.PORT || 8080, {
+const io = require("socket.io")(process.env.SOCKET_PORT || 8080, {
   cors: {
     origin: ["https://whatsapp-ap2-mern.onrender.com"],
   },
