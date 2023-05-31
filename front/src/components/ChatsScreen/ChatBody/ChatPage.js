@@ -17,10 +17,17 @@ export default function ChatPage() {
     return <Navigate to='/login' />;
   }
 
-  // create socket listen on port SOCKET_PORT and auth with username
-  // and the socket server will be the backend server on render with the same port
   const socket = io("https://backend-whatsapp.onrender.com", {
-    auth: { username: currentUser.username },
+    auth: {
+      username: currentUser.username,
+    },
+    reconnectionDelay: 1000,
+    reconnection: true,
+    reconnectionAttemps: 10,
+    transports: ["websocket"],
+    agent: false,
+    upgrade: false,
+    rejectUnauthorized: false,
   });
 
   return (
