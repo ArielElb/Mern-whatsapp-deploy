@@ -74,8 +74,11 @@ export default function Sidebar({ socket }) {
         fetchContactList();
         return;
       }
-      setContacts(updatedContacts);
-      setContactList(updatedContacts);
+      const sortedContacts = updatedContacts.sort((a, b) => {
+        return new Date(b.lastMessage.createdAt) - new Date(a.lastMessage.createdAt);
+      });
+      setContacts(sortedContacts);
+      setContactList(sortedContacts);
     });
 
     socket.on("forceDisconnect", () => {
