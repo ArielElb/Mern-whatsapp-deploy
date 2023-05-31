@@ -4,16 +4,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const socket = require("./services/SocketService.js");
 
-// const customEnv = require("custom-env");
 const app = express();
-// customEnv.env(process.env.NODE_ENV, "./config");
-// require("custom-env").env(process.env.NODE_ENV, "./config");
+const server = require("http").createServer(app);
+socket.init(server);
 
 app.use(
   cors({
-    origin: "https://whatsapp-ap2-mern.onrender.com" 
-    
+    origin: "https://whatsapp-ap2-mern.onrender.com",
   })
 );
 
@@ -26,25 +25,24 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connected to MongoDB..."));
-
-console.log(process.env.MONGODB_URL);
-console.log(process.env.PORT);
+  .then(() => console.log("Connected to MongoDB..."))
+  .catch((error) => console.error("MongoDB connection error:", error));
 
 // use /api/ to access the routes
 
 const loginRouter = require("./routes/loginRoutes");
 app.use("/api/Tokens", loginRouter);
-// const signupRouter = require("./routes/signup");
-// app.use("/api/signup", signupRouter);
+
 const userRouter = require("./routes/userRoutes");
 app.use("/api", userRouter);
+
 const chatRouter = require("./routes/chatRoutes");
 app.use("/api/Chats", chatRouter);
-// massages
+
 const messageRouter = require("./routes/messageRoutes");
 app.use("/api/Chats/", messageRouter);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

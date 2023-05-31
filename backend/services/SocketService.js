@@ -1,18 +1,17 @@
 const User = require("../models/UserModel");
 const Chat = require("../models/ChatModel");
 
-// create http server
-const httpServer = require("http").createServer();
-// socket.io and then i added cors for cross origin to localhost only
-const io = require("socket.io")(httpServer, {
-  cors: {
-    origin: "https://backend-whatsapp.onrender.com", //specific origin you want to give access to,
-  },
-});
-// listen to port
-httpServer.listen(process.env.SOCKET_PORT, () => {
-  console.log("listening on *:3000");
-});
+let io;
+function init(server) {
+  io = socketIO(server);
+}
+
+function getIO() {
+  if (!io) {
+    throw new Error("Socket.io not initialized");
+  }
+  return io;
+}
 // when a socket connects
 
 io.on("connection", (socket) => {
@@ -47,4 +46,4 @@ const sendToSocket = async (chatId, message, currentUsername) => {
   } else return false;
 };
 
-module.exports = { io, sendToSocket };
+module.exports = { init, getIO, sendToSocket };
