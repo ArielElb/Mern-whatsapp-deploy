@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import ChatController from "./ChatController";
+import ChatController from "./chatController";
 import UserContext from "../../Users/User";
 import { Navigate } from "react-router-dom";
 import { useState, useContext } from "react";
