@@ -4,6 +4,7 @@ import ChatHeader from "./ChatHeader";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
 import UserContext from "../../Users/User";
+import { API_URL } from "../../../const";
 
 export default function Chat({ contact, messages, setMessages, contacts, setContacts }) {
   const { currentUser } = useContext(UserContext);
@@ -18,15 +19,12 @@ export default function Chat({ contact, messages, setMessages, contacts, setCont
 
   async function startMessages() {
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/Chats/${contact.id}/Messages`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${currentUser.token}`,
-          },
-        }
-      );
+      const response = await fetch(API_URL + `Chats/${contact.id}/Messages`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${currentUser.token}`,
+        },
+      });
       const messages = await response.json();
       setMessages(messages);
     } catch (error) {

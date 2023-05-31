@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import UserContext from "../../Users/User";
 import { useRef } from "react";
-
+// import api uri from const.js
+import { API_URL } from "../../../const";
 export default function AddContactModal({ setContacts }) {
   const { addContact, currentUser } = useContext(UserContext);
   const username = useRef(null);
@@ -17,7 +18,7 @@ export default function AddContactModal({ setContacts }) {
       username.current.value = "";
       return;
     }
-    const response = await fetch("http://localhost:5000/api/Chats", {
+    const response = await fetch(API_URL + "Chats", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${currentUser.token}`,

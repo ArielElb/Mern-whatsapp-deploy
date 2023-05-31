@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import ChatController from "./chatController";
+import ChatController from "./ChatController";
 import UserContext from "../../Users/User";
 import { Navigate } from "react-router-dom";
 import { useState, useContext } from "react";
@@ -17,7 +17,7 @@ export default function ChatPage() {
     return <Navigate to='/login' />;
   }
 
-  const socket = io("http://localhost:8080", {
+  const socket = io("https://backend-whatsapp.onrender.com", {
     auth: {
       username: currentUser.username,
     },

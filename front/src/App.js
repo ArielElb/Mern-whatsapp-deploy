@@ -12,13 +12,14 @@ import ChatPage from "./components/ChatsScreen/ChatBody/ChatPage";
 import { useState, useEffect } from "react";
 import UserContext from "./components/Users/User";
 import NotFound from "./components/NotFound/NotFound";
+import { API_URL } from "./const";
 const imagePath = process.env.PUBLIC_URL + "/images/";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   const handleSignUp = async (username, password, displayname, profilePic) => {
     // create post request to server
-    const response = await fetch("http://localhost:5000/api/Users", {
+    const response = await fetch(API_URL + "Users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +38,7 @@ function App() {
   };
 
   const handleLogin = async (username, password) => {
-    const response = await fetch(`http://localhost:5000/api/Tokens`, {
+    const response = await fetch(API_URL + `Tokens`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,7 +50,7 @@ function App() {
     }
     const token = await response.text();
 
-    const userRes = await fetch(`http://localhost:5000/api/Users/${username}`, {
+    const userRes = await fetch(API_URL + `Users/${username}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -75,7 +76,7 @@ function App() {
       return "You cannot add yourself as a contact";
     }
 
-    const response = await fetch("http://localhost:5000/api/Chats", {
+    const response = await fetch(API_URL + "Chats", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +99,7 @@ function App() {
   };
 
   const addMessage = async (id, message) => {
-    const response = await fetch(`http://localhost:5000/api/Chats/${id}/Messages`, {
+    const response = await fetch(API_URL + `Chats/${id}/Messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +116,7 @@ function App() {
   };
 
   const refreshToken = async () => {
-    const response = await fetch(`http://localhost:5000/api/Tokens`, {
+    const response = await fetch(API_URL + `Tokens`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

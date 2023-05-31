@@ -8,6 +8,7 @@ import SideBarHeader from "../Sidebar/SideBarHeader";
 import SideBarSearch from "../Sidebar/SideBarSearch";
 import Archive from "../Sidebar/Archive";
 import NotificationToast from "./NotificationToast";
+import { API_URL } from "../../../const";
 const imagePath = process.env.PUBLIC_URL + "/images/";
 export default function Sidebar({ socket }) {
   const { currentUser, logout } = useContext(UserContext);
@@ -25,7 +26,7 @@ export default function Sidebar({ socket }) {
   }, [CurrentContact, messages]);
 
   const fetchContactList = async () => {
-    const res = await fetch("http://localhost:5000/api/Chats", {
+    const res = await fetch(API_URL + "Chats", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${currentUser.token}`,

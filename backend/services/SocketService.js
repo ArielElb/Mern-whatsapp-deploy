@@ -2,7 +2,7 @@ const User = require("../models/UserModel");
 const Chat = require("../models/ChatModel");
 const io = require("socket.io")(8080, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: ["https://whatsapp-ap2-mern.onrender.com"],
   },
 });
 

@@ -10,7 +10,11 @@ const app = express();
 // customEnv.env(process.env.NODE_ENV, "./config");
 // require("custom-env").env(process.env.NODE_ENV, "./config");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://whatsapp-ap2-mern.onrender.com",
+  })
+);
 
 app.use(express.static("public"));
 app.use(bodyParser.json({ limit: "50mb" }));
