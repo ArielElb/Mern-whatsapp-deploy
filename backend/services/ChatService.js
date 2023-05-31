@@ -33,14 +33,15 @@ const getChats = async (username) => {
       };
       formattedChats.push(formattedChat);
     }
-    return formattedChats;
+    return formattedChats.sort((a, b) => {
+      return b.lastMessage.created - a.lastMessage.created;
+    });
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
 const getChat = async (username, chatId) => {
-
   // find the chat by id
   const chat = await Chat.findById(chatId).populate("users");
   // extract the users from the chat
@@ -89,7 +90,6 @@ const createChat = async (currentUserUserName, usernameToAdd) => {
       return chat.users.includes(userToAdd._id);
     });
 
-    
     if (chatTemp) {
       throw new Error("Chat already exists.");
     }
