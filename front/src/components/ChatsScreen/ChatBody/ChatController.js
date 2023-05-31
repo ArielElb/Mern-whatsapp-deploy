@@ -75,7 +75,9 @@ export default function Sidebar({ socket }) {
         return;
       }
       const sortedContacts = updatedContacts.sort((a, b) => {
-        return new Date(b.lastMessage.createdAt) - new Date(a.lastMessage.createdAt);
+        if (a.lastMessage && b.lastMessage) {
+          return new Date(b.lastMessage.createdAt) - new Date(a.lastMessage.createdAt);
+        }
       });
       setContacts(sortedContacts);
       setContactList(sortedContacts);
