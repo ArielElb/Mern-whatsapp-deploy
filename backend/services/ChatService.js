@@ -1,4 +1,4 @@
-const Chat = require("../models/ChatModel");
+dconst Chat = require("../models/ChatModel");
 const User = require("../models/UserModel");
 const Message = require("../models/MessageModel");
 const getChats = async (username) => {
@@ -34,7 +34,10 @@ const getChats = async (username) => {
       formattedChats.push(formattedChat);
     }
     return formattedChats.sort((a, b) => {
-      return new Date(b.lastMessage.created) - new Date(a.lastMessage.created);
+      // sort the chats by the last message created date in descending order (newest first)
+      if (a.lastMessage && b.lastMessage) {
+        return b.lastMessage.created - a.lastMessage.created;
+      }
     });
   } catch (error) {
     throw new Error(error.message);
