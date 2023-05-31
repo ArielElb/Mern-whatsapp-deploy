@@ -2,8 +2,26 @@ const User = require("../models/UserModel");
 const Chat = require("../models/ChatModel");
 
 let io;
+
 function init(server) {
-  io = socketIO(server);
+  io = require("socket.io")(server);
+
+  io.on("connection", (socket) => {
+    console.log("connected from socket");
+    const { username } = socket.handshake.auth;
+    const user = User.findOne({ username: username }).then((user) => {
+      if (!user) {
+        console.log("error: user not found when connecting to socket");
+        return false;
+      }
+      const prevSock = user.room;
+      if (prevSock != undefined) {
+        io.to(prevSock).emit("forceDisconnect");
+      }
+      user.room = socket.id;
+      user.save();
+    });
+  });
 }
 
 function getIO() {
@@ -12,24 +30,6 @@ function getIO() {
   }
   return io;
 }
-// when a socket connects
-
-io.on("connection", (socket) => {
-  console.log("connected from socket");
-  const { username } = socket.handshake.auth;
-  const user = User.findOne({ username: username }).then((user) => {
-    if (!user) {
-      console.log("error: user not found when connecting to socket");
-      return false;
-    }
-    const prevSock = user.room;
-    if (prevSock != undefined) {
-      io.to(prevSock).emit("forceDisconnect");
-    }
-    user.room = socket.id;
-    user.save();
-  });
-});
 
 const sendToSocket = async (chatId, message, currentUsername) => {
   const chat = await Chat.findOne({ _id: chatId }).populate("users");
