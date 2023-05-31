@@ -1,4 +1,4 @@
-dconst Chat = require("../models/ChatModel");
+const Chat = require("../models/ChatModel");
 const User = require("../models/UserModel");
 const Message = require("../models/MessageModel");
 const getChats = async (username) => {
