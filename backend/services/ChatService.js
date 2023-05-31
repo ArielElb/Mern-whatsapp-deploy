@@ -34,7 +34,7 @@ const getChats = async (username) => {
       formattedChats.push(formattedChat);
     }
     return formattedChats.sort((a, b) => {
-      return b.lastMessage.created - a.lastMessage.created;
+      return new Date(b.lastMessage.created) - new Date(a.lastMessage.created);
     });
   } catch (error) {
     throw new Error(error.message);
