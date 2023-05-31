@@ -1,13 +1,15 @@
 const User = require("../models/UserModel");
 const Chat = require("../models/ChatModel");
-const io = require("socket.io")(process.env.SOCKET_PORT || 8080, {
+const http = require("http");
+
+const io = require("socket.io")(http, {
   cors: {
-    origin: [
-      "https://whatsapp-ap2-mern.onrender.com",
-      "https://backend-whatsapp.onrender.com",
-    ],
+    origin: "*",
   },
-  transports: ["polling"],
+});
+
+http.listen(process.env.SOCKET_PORT, () => {
+  console.log("listening on *:4000");
 });
 
 io.on("connection", (socket) => {
