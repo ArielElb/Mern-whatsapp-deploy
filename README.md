@@ -3,6 +3,9 @@
 ## This is a web app for a Whatsapp chat interface built using React, CSS, JavaScript, Bootstrap, as well as Mongodb and SocketIO.
 The app has four main screens: login, signup, chats and error page.
 
+## Link for the website :
+https://whatsapp-ap2-mern.onrender.com/
+
 ### Installation and Usage
 
 1. Clone or download the repository to your local machine.
@@ -20,9 +23,6 @@ For windows powershell, run:
 ```
   npm test
 ```
-When activating the application, the build folder we created allows the user to browse to "https://localhost:5000", which will open the react
-application and automatically connect via the connection string located at the .env.local file to the loacl database, where all the users and chats information is stored.
-the database is mongoDB and it will connect to ur local database with the following connection string : mongodb://127.0.0.1:27017/
 
 
 ###  MVC architecture :
