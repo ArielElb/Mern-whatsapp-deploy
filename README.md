@@ -6,25 +6,6 @@ The app has four main screens: login, signup, chats and error page.
 ## Link for the website :
 https://whatsapp-ap2-mern.onrender.com/
 
-### Installation and Usage
-
-1. Clone or download the repository to your local machine.
-2. Open the project folder in your code editor.
-3. cd backend.
-4. Install dependencies using : npm install 
-5. Make sure you have the react-bootstrap library installed, as weel as Mongoose and SocketIO.
-6. Create a new file called .env.local in the /backend/config folder, to which you need to copy the content of the .env.test (same folder).
-
-For apple users, run the following command:
-```
-  npm run test
-```
-For windows powershell, run:
-```
-  npm test
-```
-
-
 ###  MVC architecture :
 
 ![image](https://github.com/ArielElb/AP2-ass2/assets/94087682/083d83ff-69ec-4440-ae8d-b03518def4dc)
